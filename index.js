@@ -1,13 +1,22 @@
 const express=require('express')
+const dotenv = require('dotenv')
 const app=express()
 const mongoose=require ('mongoose')
 const model=require('./schema')
+const PORT = process.env.PORT || 5000
+
+dotenv.config()
 
 app.use(express.json());
-let dburl="mongodb+srv://Ramya:Admin123@cluster0.2jync.mongodb.net/test?retryWrites=true&w=majority";
-mongoose.connect(dburl)
-.then(res=>console.log('server connected  with db'))
-.catch(res=>console.log('server not connected with db'));
+
+
+mongoose
+.connect(process.env.MONGO_URL, {
+    useNewUrlParser: true,
+})
+.then(() => console.log("DB Connected..!"))
+.catch(err => console.log(err))
+
 app.get('/grocs',async(req,res)=>{
     try
     {
@@ -98,4 +107,11 @@ app.delete('/delete/:name',async(req,res)=>{
         console.log(error);
     }
 })
-app.listen(5000);
+// app.listen(5000);
+
+// app.use('/', req, res => {
+//     res.send(`Server is up and running on port ${PORT}`)
+// })
+
+app.listen(process.env.PORT, () => console.log(`Server is up and listening to the ${PORT}`))
+app.get('/', (req, res) => res.send("Hello world"))

@@ -13,7 +13,7 @@
   * Get port from environment and store in Express.
   */
  
-  let dburl ="mongodb+srv://Ramya:Admin123@cluster0.2jync.mongodb.net/test?retryWrites=true&w=majority";
+  // let dburl ="mongodb+srv://Ramya:Admin123@cluster0.2jync.mongodb.net/test?retryWrites=true&w=majority";
  
  var port = normalizePort(process.env.PORT || '7000');
  app.set('port', port);
